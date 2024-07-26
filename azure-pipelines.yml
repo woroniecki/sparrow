@@ -29,13 +29,6 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: CmdLine@2
-      inputs:
-        script: |
-          echo Write your commands here
-          
-          echo Hello world
-        workingDirectory: '$(Build.SourcesDirectory)'
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
