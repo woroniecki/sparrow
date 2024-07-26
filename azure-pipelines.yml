@@ -6,6 +6,7 @@ resources:
 
 variables:
   dockerRegistryServiceConnection: '6182441a-a44c-4647-9a12-c8846b43f898' # Połączenie usługi z ACR
+  azureServiceConnection: 'techsparrow-rg' # Połączenie do Azure
   imageRepository: 'techsparrowdocker' # Repozytorium w ACR
   containerRegistry: 'sparrowcontainerregistry.azurecr.io' # Adres ACR
   dockerfilePath: '$(Build.SourcesDirectory)/Sparrow/Dockerfile' # Ścieżka do Dockerfile
@@ -35,6 +36,12 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - script: |
-        az acr repository show-tags --name sparrowcontainerregistry --repository techsparrowdocker
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: $(azureServiceConnection)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          az acr login --name sparrowcontainerregistry
+          az acr repository show-tags --name sparrowcontainerregistry --repository techsparrowdocker
       displayName: 'Verify image pushed to ACR'
