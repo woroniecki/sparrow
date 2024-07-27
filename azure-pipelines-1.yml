@@ -8,7 +8,7 @@ jobs:
 - deployment: VMDeploy
   displayName: Deploy to VM
   environment: 
-    name: VMenv
+    name: Sparrow Test 01
     resourceType: virtualMachine
     tags: test # only deploy to VMs with both windows and prod tags
   strategy:
