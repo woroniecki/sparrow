@@ -1,0 +1,18 @@
+trigger: 
+- main
+
+pool: 
+   vmImage: ubuntu-latest
+
+jobs:
+- deployment: VMDeploy
+  displayName: Deploy to VM
+  environment: 
+    name: VMenv
+    resourceType: virtualMachine
+    tags: test # only deploy to VMs with both windows and prod tags
+  strategy:
+    runOnce:
+      deploy:   
+          steps:
+          - script: echo "Hello world"
