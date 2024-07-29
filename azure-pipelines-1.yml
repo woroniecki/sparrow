@@ -1,6 +1,34 @@
 trigger: none
 
-parameters:
+######################
+# Declare Parameters:-
+######################
+parameters: 
+- name: DevOpsOrganisation
+  type: string
+  default: https://dev.azure.com/ArindamMitra0251
+  values:
+  - https://dev.azure.com/ArindamMitra0251
+
+- name: DevOpsProjName
+  type: string
+  default: AMCLOUD
+  values:
+  - AMCLOUD
+
+- name: KVNAME
+  displayName: Please Provide the Keyvault Name:-
+  type: object
+  default: ampockv
+
+- name: ACRName
+  type: object
+  default: ampocapplacr
+
+- name: ACRSrvConnectionName
+  type: object
+  default: AM-ACR-Srv-Connection
+
 - name: image
   displayName: Pool Image
   type: string
