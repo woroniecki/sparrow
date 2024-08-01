@@ -15,7 +15,7 @@ steps:
       az acr login --name sparrowcontainerregistry
       
       # Wypisz dostępne buildy
-      az acr build-task list-runs --registry sparrowcontainerregistry --output table
+      az acr task list-runs --registry sparrowcontainerregistry --output table
 
 # resources:
 # - repo: self
