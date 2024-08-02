@@ -1,15 +1,14 @@
 resources:
 - repo: self
-
 variables:
-  dockerRegistryServiceConnection: '6182441a-a44c-4647-9a12-c8846b43f898' # Połączenie usługi z ACR
-  azureServiceConnection: 'techsparrow-rg' # Połączenie do Azure
-  imageRepository: 'techsparrowdocker' # Repozytorium w ACR
-  containerRegistry: 'sparrowcontainerregistry.azurecr.io' # Adres ACR
-  dockerfilePath: '$(Build.SourcesDirectory)/Sparrow/Dockerfile' # Ścieżka do Dockerfile
-  tag: '$(Build.BuildId)' # Znacznik obrazu
-  vmImageName: 'ubuntu-latest' # Wersja agenta
-
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '6182441a-a44c-4647-9a12-c8846b43f898'
+  imageRepository: 'techsparrowdocker'
+  containerRegistry: 'sparrowcontainerregistry.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Sparrow/Dockerfile'
+  tag: '$(Build.BuildId)'
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 stages:
 - stage: Build
   displayName: Build and push stage
@@ -23,8 +22,8 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(containerRegistry)/$(imageRepository)
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(tag)'
+          $(tag)
